@@ -26,6 +26,10 @@ Route::get('/post', function () {
 
 // Admin Routes 
 
-Route::get('/dashboard', function () {
-    return view('admin.index');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
+    Route::get('/dashboard', function () {
+        return view('admin.index');
+    });
+
 });
+
