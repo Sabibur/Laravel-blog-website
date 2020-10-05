@@ -24,8 +24,31 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
-                    asdf
+                <div class="card card-primary col-lg-12 ">
+                    <div class=" col-6 m-auto">
+
+                        <form action="{{ route('category.store') }}" method="POST">
+                            @csrf
+                            <div class="card-body ">
+                                <div class="form-group">
+                                    <label for="">Category Name</label>
+                                    <input type="text" class="form-control" name="name" id="" placeholder="Enter Name">
+                                    @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label for="">Category Description</label>
+                                    <textarea name="description" id="" class="form-control" rows="4"
+                                        placeholder="Enter Description"></textarea>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer bg-white ">
+                                <button type="submit" class="btn btn-primary ">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -35,7 +36,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:categories,name',
+        ]);
+
+        $category = Category::create([
+            'name' => $request->name, 
+            'slug' => Str::slug($request->name, '-'), 
+            'description' => $request->description, 
+        ]);
+
+        return redirect()->back();
     }
 
     /**
