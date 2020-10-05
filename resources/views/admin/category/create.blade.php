@@ -25,18 +25,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="card card-primary col-lg-12 ">
-                    <div class=" col-6 m-auto">
+                    <div class=" col-lg-6 offset-lg-3 col-md-8 offset-md-2 m-auto">
 
                         <form action="{{ route('category.store') }}" method="POST">
                             @csrf
                             <div class="card-body ">
-                                <div class="form-group">
+                                <div class="form-group mt-3">
                                     <label for="">Category Name</label>
                                     <input type="text" class="form-control" name="name" id="" placeholder="Enter Name">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                
                                 <div class="form-group mb-0">
                                     <label for="">Category Description</label>
                                     <textarea name="description" id="" class="form-control" rows="4"
@@ -44,7 +45,7 @@
                                 </div>
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer bg-white ">
+                            <div class="card-footer bg-white mb-3">
                                 <button type="submit" class="btn btn-primary ">Submit</button>
                             </div>
                         </form>
@@ -56,3 +57,4 @@
     </div>
     <!-- /.content -->
 @endsection
+

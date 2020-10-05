@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('admin')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('admin')}}/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ asset('admin')}}/dist/css/toastr.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -170,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview ">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -192,6 +193,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('category.index') }}" class="nav-link ">
+              <i class="nav-icon fab fa-buromobelexperte"></i>
+              <p>
+                Catagory
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -245,5 +255,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('admin')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin')}}/dist/js/adminlte.min.js"></script>
+<script src="{{ asset('admin')}}/dist/js/toastr.min.js"></script>
+<script>
+  @yield('ToastrJs')
+</script>
 </body>
 </html>

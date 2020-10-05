@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Session;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.category');
+        $categorys = Category::orderBy('created_at', "DESC")->paginate(10);
+        return view('admin.category.category', compact('categorys'));
     }
 
     /**
@@ -40,13 +43,13 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories,name',
         ]);
 
-        $category = Category::create([
+        Category::create([
             'name' => $request->name, 
             'slug' => Str::slug($request->name, '-'), 
             'description' => $request->description, 
         ]);
-
-        return redirect()->back();
+        Session::flash("success", "Category Create Successfully!");
+        return redirect()->route('category.index');
     }
 
     /**
@@ -91,6 +94,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+
+        echo $category;
+        // Category::where('id', $category->id)->delete();
+        // Session::flash("success", "Category Delete Successfully!");
+        // return redirect()->route('category.index');
+
     }
 }

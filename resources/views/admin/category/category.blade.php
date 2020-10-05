@@ -40,24 +40,34 @@
                                         <th>Name</th>
                                         <th>Slug</th>
                                         <th>Post Count</th>
-                                        <th style="width: 40px">Action</th>
+                                        <th style="width: 15%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1.</td>
-                                        <td>Update software</td>
-                                        <td>Update software</td>
-                                        <td>
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                            </div>
-                                        </td>
-                                        <td><span class="badge bg-danger">55%</span></td>
-                                    </tr>
-                                    
+                                    @foreach ($categorys as $category)
+                                        <tr>
+                                            <td>{{ $category->id }}</td>
+                                            <td>{{ $category->name }}</td>
+                                            <td>{{ $category->slug }}</td>
+                                            <td>{{ $category->id }}</td>
+                                            <td>
+                                                <a href="{{ route('category.show', [$category->id]) }}"
+                                                    class="btn btn-sm btn-secondary mr-2"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('category.edit', [$category->id]) }}"
+                                                    class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit"></i></a>
+
+                                                <a href="{{ route('category.destroy', [$category->id]) }}"
+                                                    class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="card-footer m-auto bg-white">
+                            {{ $categorys->links() }}
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -67,4 +77,14 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+@endsection
+
+
+
+@section('ToastrJs')
+
+    @if (Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+    @endif
+
 @endsection
