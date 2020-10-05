@@ -10,7 +10,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
     return view('blogsite.index');
-});
+})->name('blogsite');
+
 Route::get('/about', function () {
     return view('blogsite.about');
 });
@@ -30,6 +31,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
     Route::get('/dashboard', function () {
         return view('admin.index');
     });
+
+    Route::resource('category', 'CategoryController');
 
 });
 
