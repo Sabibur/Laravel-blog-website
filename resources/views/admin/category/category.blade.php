@@ -51,13 +51,20 @@
                                             <td>{{ $category->slug }}</td>
                                             <td>{{ $category->id }}</td>
                                             <td>
-                                                <a href="{{ route('category.show', [$category->id]) }}"
+                                                {{-- <a
+                                                    href="{{ route('category.show', [$category->id]) }}"
                                                     class="btn btn-sm btn-secondary mr-2"><i class="fa fa-eye"></i></a>
+                                                --}}
                                                 <a href="{{ route('category.edit', [$category->id]) }}"
-                                                    class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit"></i></a>
+                                                    class="btn btn-sm btn-warning mr-1"><i class="fa fa-edit"></i></a>
+                                                <form action="{{ route('category.destroy', [$category->id]) }}" method="POST"
+                                                    class="mr-1 d-inline-block">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-danger"><i
+                                                            class="fa fa-trash"></i></button>
+                                                </form>
 
-                                                <a href="{{ route('category.destroy', [$category->id]) }}"
-                                                    class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
 
                                             </td>
                                         </tr>

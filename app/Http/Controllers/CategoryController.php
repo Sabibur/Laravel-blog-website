@@ -44,9 +44,9 @@ class CategoryController extends Controller
         ]);
 
         Category::create([
-            'name' => $request->name, 
-            'slug' => Str::slug($request->name, '-'), 
-            'description' => $request->description, 
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
+            'description' => $request->description,
         ]);
         Session::flash("success", "Category Create Successfully!");
         return redirect()->route('category.index');
@@ -71,7 +71,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -83,7 +83,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request, [
+            'name' => "required|unique:categories,name,$category->id"
+        ]);
+
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name, '-');
+        $category->description = $request->description;
+        $category->save();
+
+        Session::flash("success", "Category Edit Successfully!");
+        return redirect()->route('category.index');
     }
 
     /**
@@ -95,10 +105,10 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
 
-        echo $category;
-        // Category::where('id', $category->id)->delete();
-        // Session::flash("success", "Category Delete Successfully!");
-        // return redirect()->route('category.index');
+       
+        Category::where('id', $category->id)->delete();
+        Session::flash("success", "Category Delete Successfully!");
+        return redirect()->route('category.index');
 
     }
 }
