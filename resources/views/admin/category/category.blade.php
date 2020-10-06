@@ -47,7 +47,7 @@
 
                                     @forelse ($categorys as $category)
                                         <tr>
-                                            <td>{{ $loop->index+1 }}</td>
+                                            <td>{{ $loop->index + 1 }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->slug }}</td>
                                             <td>{{ $category->id }}</td>
@@ -69,6 +69,7 @@
 
                                             </td>
                                         </tr>
+
                                     @empty
                                         <tr class="text-danger text-center">
                                             <td colspan="5">No Data available</td>
@@ -78,9 +79,12 @@
                                 </tbody>
                             </table>
                         </div>
+                        @if ($categorys->count())
                         <div class="card-footer m-auto bg-white">
                             {{ $categorys->links() }}
                         </div>
+                        @endif
+
                         <!-- /.card-body -->
                     </div>
                 </div>

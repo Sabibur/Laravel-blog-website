@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use App\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -39,7 +39,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validate($request, [ 
             'name' => 'required|unique:categories,name',
         ]);
 

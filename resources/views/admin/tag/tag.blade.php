@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Category List</h1>
+                    <h1 class="m-0 text-dark">Tag List</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('blogsite') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Category List</li>
+                        <li class="breadcrumb-item active">Tag List</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,8 +27,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="card-title">Category List</h3>
-                                <a href="{{ route('category.create') }}" class="btn btn-primary">Create Category</a>
+                                <h3 class="card-title">Tag List</h3>
+                                <a href="{{ route('tag.create') }}" class="btn btn-primary">Create Tag</a>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -45,20 +45,19 @@
                                 </thead>
                                 <tbody>
 
-                                    @forelse ($categorys as $category)
+                                    @forelse ($tags as $tag)
                                         <tr>
-                                            <td>{{ $loop->index+1 }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->slug }}</td>
-                                            <td>{{ $category->id }}</td>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td>{{ $tag->name }}</td>
+                                            <td>{{ $tag->slug }}</td>
+                                            <td>{{ $tag->id }}</td>
                                             <td>
-                                                {{-- <a
-                                                    href="{{ route('category.show', [$category->id]) }}"
+                                                {{-- <a href="{{ route('tag.show', [$tag->id]) }}"
                                                     class="btn btn-sm btn-secondary mr-2"><i class="fa fa-eye"></i></a>
                                                 --}}
-                                                <a href="{{ route('category.edit', [$category->id]) }}"
+                                                <a href="{{ route('tag.edit', [$tag->id]) }}"
                                                     class="btn btn-sm btn-warning mr-1"><i class="fa fa-edit"></i></a>
-                                                <form action="{{ route('category.destroy', [$category->id]) }}" method="POST"
+                                                <form action="{{ route('tag.destroy', [$tag->id]) }}" method="POST"
                                                     class="mr-1 d-inline-block">
                                                     @method('DELETE')
                                                     @csrf
@@ -69,20 +68,25 @@
 
                                             </td>
                                         </tr>
+
                                     @empty
                                         <tr class="text-danger text-center">
                                             <td colspan="5">No Data available</td>
                                         </tr>
+
                                     @endforelse
 
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer m-auto bg-white">
-                            {{ $categorys->links() }}
-                        </div>
+                        @if ($tags->count())
+                            <div class="card-footer m-auto bg-white">
+                                {{ $tags->links() }}
+                            </div>
+                        @endif
                         <!-- /.card-body -->
                     </div>
+
                 </div>
             </div>
             <!-- /.row -->

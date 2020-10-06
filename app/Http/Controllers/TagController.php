@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -14,9 +16,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::orderBy('created_at', "DESC")->paginate(10);
+        return view('admin.tag.tag', compact('tags'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +26,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tag.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:tags,name',
+        ]);
+
+        Tag::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '-'),
+            'description' => $request->description,
+        ]);
+        Session::flash("success", "Tag Create Successfully!");
+        return redirect()->route('tag.index');
     }
 
     /**
@@ -57,7 +69,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.tag.edit', compact('tag'));
     }
 
     /**
@@ -69,7 +81,17 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $this->validate($request, [
+            'name' => "required|unique:tags,name,$tag->id"
+        ]);
+
+        $tag->name = $request->name;
+        $tag->slug = Str::slug($request->name, '-');
+        $tag->description = $request->description;
+        $tag->save();
+
+        Session::flash("success", "Tag Edit Successfully!");
+        return redirect()->route('tag.index');
     }
 
     /**
@@ -80,6 +102,9 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        Tag::where('id', $tag->id)->delete();
+        Session::flash("success", "Tag Delete Successfully!");
+        return redirect()->route('tag.index');
+
     }
 }

@@ -172,7 +172,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Starter Pages
@@ -194,13 +194,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+          
           <li class="nav-item">
             <a href="{{ route('category.index') }}" class="nav-link ">
-              <i class="nav-icon fab fa-buromobelexperte"></i>
+              <i class="nav-icon fa fa-tags"></i>
               <p>
                 Catagory
-                <span class="right badge badge-danger">New</span>
               </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('tag.index') }}" class="nav-link ">
+              <i class="nav-icon fa fa-tag"></i>
+              <p>
+                Tag
+               </p>
             </a>
           </li>
           <li class="nav-item">

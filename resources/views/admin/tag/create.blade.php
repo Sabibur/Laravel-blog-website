@@ -6,13 +6,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Category Create</h1>
+                    <h1 class="m-0 text-dark">Tag Create</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('blogsite') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('category.index') }}">Category List</a></li>
-                        <li class="breadcrumb-item active">Category Create</li>
+                        <li class="breadcrumb-item"><a href="{{ route('tag.index') }}">Tag List</a></li>
+                        <li class="breadcrumb-item active">Tag Create</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,11 +27,11 @@
                 <div class="card card-primary col-lg-12 ">
                     <div class=" col-lg-6 offset-lg-3 col-md-8 offset-md-2 m-auto">
 
-                        <form action="{{ route('category.store') }}" method="POST">
+                        <form action="{{ route('tag.store') }}" method="POST">
                             @csrf
                             <div class="card-body ">
                                 <div class="form-group mt-3">
-                                    <label for="">Category Name</label>
+                                    <label for="">Tag Name</label>
                                     <input type="text" class="form-control" name="name" id="" placeholder="Enter Name">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
@@ -39,7 +39,7 @@
                                 </div>
                                 
                                 <div class="form-group mb-0">
-                                    <label for="">Category Description</label>
+                                    <label for="">Tag Description</label>
                                     <textarea name="description" id="" class="form-control" rows="4"
                                         placeholder="Enter Description"></textarea>
                                 </div>
