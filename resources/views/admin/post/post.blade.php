@@ -37,9 +37,12 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">SI</th>
-                                        <th>Name</th>
-                                        <th>Slug</th>
-                                        <th>Post Count</th>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        {{-- <th>Tags</th> --}}
+                                        <th>Author</th>
+                                        <th style="width: 130px">Created Date</th>
                                         <th style="width: 15%">Action</th>
                                     </tr>
                                 </thead>
@@ -48,9 +51,16 @@
                                     @forelse ($posts as $post)
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $post->name }}</td>
-                                            <td>{{ $post->slug }}</td>
-                                            <td>{{ $post->id }}</td>
+                                            <td>
+                                                <div style="max-width: 70px; max-height:70px;overflow:hidden">
+                                                    <img src="{{ asset($post->image) }}" class="img-fluid img-rounded" alt="">
+                                                </div>
+                                            </td>
+
+                                            <td>{{ $post->title }}</td>
+                                            <td>{{ $post->category->name }}</td>
+                                            <td>{{ $post->user->name }}</td>
+                                            <td>{{ $post->created_at->format('d M, Y') }}</td>
                                             <td>
                                                 {{-- <a
                                                     href="{{ route('post.show', [$post->id]) }}"
@@ -80,9 +90,9 @@
                             </table>
                         </div>
                         @if ($posts->count())
-                        <div class="card-footer m-auto bg-white">
-                            {{ $posts->links() }}
-                        </div>
+                            <div class="card-footer m-auto bg-white">
+                                {{ $posts->links() }}
+                            </div>
                         @endif
 
                         <!-- /.card-body -->

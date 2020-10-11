@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Tag;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -38,7 +42,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $this->validate($request, [
+            'title' => 'required|unique:posts,title',
+            'image' => 'required|image',
+            'description' => 'required',
+            'category' => 'required',
+        ]);
+
+        $post = Post::create([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'image' => "image.jpg",
+            'description' => $request->description,
+            'category_id' => $request->category,
+            'user_id' => auth()->user()->id,
+            'published_at' => Carbon::now(),
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $image_new_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move('images/post/', $image_new_name);
+            $post->image = '/images/post/' . $image_new_name;
+            $post->save();
+        }
+
+        Session::flash('success', 'Post created successfully');
+        return redirect()->back();
     }
 
     /**
