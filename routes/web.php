@@ -30,7 +30,7 @@ Route::get('/post', function () {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
     Route::get('/dashboard', function () {
         return view('admin.index');
-    });
+    })->name('dashboard');
 
     Route::resource('category', 'CategoryController');
     Route::resource('tag', 'TagController');
